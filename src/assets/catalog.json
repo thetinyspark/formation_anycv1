@@ -4,20 +4,23 @@
         "name": "Call Of Duty",
         "price": 79.99,
         "description": "A FPS game.", 
-        "img": "./assets/img/cod.jpg"
+        "img": "./assets/img/cod.jpg", 
+        "platform": "PC"
     },
     {
         "id": 2,
         "name": "Tetris",
         "price": 29.99,
         "description": "A classic puzzle game.", 
-        "img": "./assets/img/tetris.jpg"
+        "img": "./assets/img/tetris.jpg", 
+        "platform": "Gameboy"
     },
     {
         "id": 3,
         "name": "Mario Bros 3",
         "price": 9.99,
         "description": "A platform game.", 
-        "img": "./assets/img/mario.png"
+        "img": "./assets/img/mario.png", 
+        "platform": "NES"
     }
 ]

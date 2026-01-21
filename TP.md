@@ -1,14 +1,11 @@
-# TP n°2
+# TP n°3
 
-Créez un composant nommé Navbar dont le but est d'afficher l'ensemble 
-des liens nous permettant de naviguer à travers notre boutique/ 
-Chaque lien doit mener vers un composant différent (que vous devez générer). 
 
-Liste des composants et liens à générer: 
+Ajouter une propriété "platform" à chaque produit
 
-- catalog / CatalogComponent
-- home / HomeComponent
-- cart / CartComponent
+À l'aide de la directive NgFor, ajoutez une balise <select> contenant l'intégralité des plateformes 
+disponibles pour l'ensemble du catalogue en vous basant sur l'ensemble des plateformes de tous les jeux. 
 
-Le but est de répertorier tous les liens de navigation au sein d'un même module. 
-Ce dernier devra être intégré au sein de AppComponent. 
+Attention, la liste ne doit pas contenir de doublons. 
+
+
