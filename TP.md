@@ -1,15 +1,14 @@
-# TP n°1
+# TP n°2
 
-Créez un composant standalone nommé IDCard
-dont le but est d'afficher des éléments concernant votre identité: 
+Créez un composant nommé Navbar dont le but est d'afficher l'ensemble 
+des liens nous permettant de naviguer à travers notre boutique/ 
+Chaque lien doit mener vers un composant différent (que vous devez générer). 
 
-- Nom
-- Prenom
-- Age
-- Votre plat préféré 
-- Votre date de naissance 
+Liste des composants et liens à générer: 
 
-Le but est d'intégrer ce composant au sein de AppComponent. 
-Chaque information personnelle doit être stockée dans une propriété 
-publique du composant IDCard et affichée à l'aide de la syntaxe du one way databinding
-{{nom_de_ma_variable}}
+- catalog / CatalogComponent
+- home / HomeComponent
+- cart / CartComponent
+
+Le but est de répertorier tous les liens de navigation au sein d'un même module. 
+Ce dernier devra être intégré au sein de AppComponent. 
