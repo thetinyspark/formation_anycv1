@@ -1,8 +1,0 @@
-{
-  "locale": "en-US",
-  "translations": {
-    "938742352995039869": "Platform: ",
-    "7933013213075875446": " Welcome {$ICU} ",
-    "6597881535235015075": "{VAR_PLURAL, plural, =0 {there is no products} =1 {there is one product} other {there is {INTERPOLATION} product }}"
-  }
-}

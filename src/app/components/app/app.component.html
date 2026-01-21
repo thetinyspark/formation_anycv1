@@ -1,15 +1,5 @@
 <main id="mainContent">
     <h1>{{title}}</h1>
-
-    <p>{{isLoading()}}</p>
-
-    <app-nav-bar></app-nav-bar>
     <router-outlet></router-outlet>
-
-    <div class="loader" *ngIf=" isLoading() == true ">
-        <p>{{percentage()}}%</p>
-        <img src="./assets/img/spinner.gif" />
-    </div>
 </main>
 
-    

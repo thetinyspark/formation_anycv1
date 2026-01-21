@@ -9,17 +9,6 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
-      "i18n": {
-        "sourceLocale": "en", 
-        "locales": {
-          "fr-FR": {
-            "translation": "src/locales/messages.fr.json"
-          },
-          "en-US": {
-            "translation": "src/locales/messages.en.json"
-          }
-        }
-      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
