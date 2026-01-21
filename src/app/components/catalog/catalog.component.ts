@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { Product, PRODUCTS } from '../../models/product';
+import { Component, inject } from '@angular/core';
+import { Product } from '../../models/product';
 import { NgFor } from '@angular/common';
 import { PlatformPipe } from '../../pipes/platform.pipe';
 import { FormsModule } from '@angular/forms';
 import { CatalogPipe } from '../../pipes/catalog.pipe';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-catalog',
@@ -19,13 +20,18 @@ export class CatalogComponent {
   public searchName:string = "";
   public minPrice:number = 0;
   public maxPrice:number = 1000;
+  private _catalogService: ProductService = inject(ProductService);
 
   ngOnInit(): void {
-    this.products = PRODUCTS;
-    this.allPlatforms = Array.from( new Set(this.products.map(product => product.platform)) );
-    this.allPlatforms.unshift("All");
-
-    this.selectedPlatform = this.allPlatforms[0];
+    this._catalogService.getProducts().subscribe( 
+      
+      (products:Product[]) => {
+        this.products = products;
+        this.allPlatforms = Array.from( new Set(this.products.map(product => product.platform)) );
+        this.allPlatforms.unshift("All");
+        this.selectedPlatform = this.allPlatforms[0];
+      }
+    );
   }
 
   getCatalogFilters() {
