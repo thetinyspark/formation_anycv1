@@ -1,23 +1,10 @@
 export class Product {
-    public id:number;
-    public name:string;
-    public price:number;
-    public description:string;
-    public img:string;
-
-    constructor(
-        id:number, 
-        name:string, 
-        price:number, 
-        description:string, 
-        img:string
-    ) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.img = img;
-    }
+    public id:number = -1;
+    public name:string = "";
+    public price:number = 0;
+    public description:string = "";
+    public img:string = "";
+    public platform:string = "";
 }
 
 export const PRODUCTS: Product[] = [
@@ -26,20 +13,31 @@ export const PRODUCTS: Product[] = [
         "name": "Call Of Duty",
         "price": 79.99,
         "description": "A FPS game.", 
-        "img": "./assets/img/cod.jpg"
+        "img": "./assets/img/cod.jpg", 
+        "platform": "PC"
+    },
+    {
+        "id": 4,
+        "name": "Call Of Duty",
+        "price": 59.99,
+        "description": "A FPS game.", 
+        "img": "./assets/img/cod.jpg", 
+        "platform": "Switch"
     },
     {
         "id": 2,
         "name": "Tetris",
         "price": 29.99,
         "description": "A classic puzzle game.", 
-        "img": "./assets/img/tetris.jpg"
+        "img": "./assets/img/tetris.jpg", 
+        "platform": "Game Boy"
     },
     {
         "id": 3,
         "name": "Mario Bros 3",
         "price": 9.99,
         "description": "A platform game.", 
-        "img": "./assets/img/mario.png"
+        "img": "./assets/img/mario.png", 
+        "platform": "NES"
     }
 ];

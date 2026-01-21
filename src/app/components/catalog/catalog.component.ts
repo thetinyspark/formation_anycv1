@@ -11,8 +11,11 @@ import { NgFor } from '@angular/common';
 })
 export class CatalogComponent {
   public products:Product[] = [];
+  public allPlatforms:string[] = [];
 
   ngOnInit(): void {
     this.products = PRODUCTS;
+    this.allPlatforms = Array.from( new Set(this.products.map(product => product.platform)) );
+    this.allPlatforms.unshift("All");
   }
 }
