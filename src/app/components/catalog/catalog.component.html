@@ -3,13 +3,22 @@
     <select name="" id="" [(ngModel)]="selectedPlatform">
         <option *ngFor="let currentPlatform of allPlatforms" value={{currentPlatform}}>{{ currentPlatform }}</option>
     </select>
+    <br/>
 
-    <!-- <input  type="text" placeholder="Filter by platform"> -->
+    <label for="searchName">Search by name:</label>
+    <input  type="text" [(ngModel)]="searchName" placeholder="Search by name" />
+    <br/>
 
-    <p>{{selectedPlatform}}</p>
+    <label for="minPrice">Min Price:</label>
+    <input  type="number" [(ngModel)]="minPrice" />
+    <br/>
+
+    <label for="maxPrice">Max Price:</label>
+    <input  type="number" [(ngModel)]="maxPrice" />
+    <br/>
 </div>
 <div class="products">
-    <div *ngFor="let currentProduct of products | platformFilter:selectedPlatform" class="product">
+    <div *ngFor="let currentProduct of products | catalogFilter:getCatalogFilters()" class="product">
         <h3>{{ currentProduct.name }}</h3>
         <img [src]="currentProduct.img" [alt]="currentProduct.name">
         <p>{{ currentProduct.description }}</p>
