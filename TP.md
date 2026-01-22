@@ -1,8 +1,17 @@
-# TP n°8
+# TP n°9
 
 
-Créez un ReplaySubject permettant de diffuser des prix toutes les 100ms. 
-Créez un ReplaySubject permettant de diffuser le taux de TVA toutes les 100ms.
+Ajouter des boutons au catalog.component.html permettant d'augmenter / diminuer le prix HT. 
+Observez la réaction du computed. 
 
-Souscrire aux deux ReplaySubject, à chaque fois que les valeurs de l'un
-change, calculer la liste des prix TCC. 
+
+
+
+# TP n°10
+
+- Modifier le ProductService avec des signaux. 
+- Créez un signal products contenant l'ensemble des produits
+- Mettez à jour les produits en invoquant une fonction refresh() qui mettra à jour 
+la valeur du signal<Product[]>. Cette mise à jour doit s'effectuer  toutes les secondes 
+(elle doit donc être gérée en interne au sein du service, on ne doit pas la délencher depuis l'exétérieur)
+- Utilisez le signal<Product[]> directement dans le composant catalog.component

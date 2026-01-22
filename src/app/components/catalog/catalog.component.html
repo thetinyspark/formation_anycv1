@@ -26,3 +26,13 @@
         <p>Platform: {{ currentProduct.platform }}</p>
     </div>
 </div>
+
+<div>
+    <p>{{myPriceHT()}}</p> <br/>
+    <p>{{myPriceTTC()}}</p> <br/>
+    <p>{{myTVA()}}</p> <br/>
+    <button (click)="incTVA()">TVA+</button>
+    <button (click)="decTVA()">TVA-</button>
+</div>
+
+<br/>

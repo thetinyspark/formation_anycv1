@@ -84,6 +84,7 @@ export class DemoService {
 
     
 
+    /*
     const pricesObs = new ReplaySubject<number>();
     const tvaObs = new ReplaySubject<number>();
 
@@ -112,6 +113,7 @@ export class DemoService {
       }, 2000
     );
 
+    */
   }
 
   private async getUserInfo(): Promise<UserInfo3[]>{

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { Product } from '../../models/product';
 import { NgFor } from '@angular/common';
 import { PlatformPipe } from '../../pipes/platform.pipe';
@@ -20,7 +20,27 @@ export class CatalogComponent {
   public searchName:string = "";
   public minPrice:number = 0;
   public maxPrice:number = 1000;
+
+
+
+  public myPriceTTC = computed( 
+    ()=>{
+      return this.myPriceHT() + ( this.myPriceHT() * this.myTVA())/100
+    }
+  );
+  public myPriceHT = signal<number>(100);
+  public myTVA = signal<number>(0);
   private _catalogService: ProductService = inject(ProductService);
+
+  constructor(){
+    // effect(
+    //   ()=>{
+    //     const priceHT = this.myPriceHT();
+    //     const tva = this.myTVA();
+    //     // this.myPriceTTC = ( priceHT + (priceHT * tva)/100);
+    //   }
+    // )
+  }
 
   ngOnInit(): void {
     this._catalogService.getProducts().subscribe(products => this.products = products);
@@ -39,5 +59,12 @@ export class CatalogComponent {
       minPrice: this.minPrice,
       maxPrice: this.maxPrice
     };
+  }
+
+  public incTVA():void{
+    this.myTVA.set(this.myTVA()+1)
+  }
+  public decTVA():void{
+    this.myTVA.set(this.myTVA()-1)
   }
 }
