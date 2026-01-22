@@ -1,11 +1,8 @@
-# TP n°7
+# TP n°8
 
 
-Créez un observable qui permet de diffuser des nombres compris entre 0-100. 
-On part du principe que ces nombres sont des prix. 
+Créez un ReplaySubject permettant de diffuser des prix toutes les 100ms. 
+Créez un ReplaySubject permettant de diffuser le taux de TVA toutes les 100ms.
 
-Affichez-les dans la console.
-
-BONUS: faire en sorte que ces nombres soient diffusés à intervalle régulier (100ms par ex);
-
-ATTENTION, si on ne souscrit plus au flux de données, alors il faudra bien tout nettoyer (interval si vous en avez, et/ou compléter le flux si nécessaire);
+Souscrire aux deux ReplaySubject, à chaque fois que les valeurs de l'un
+change, calculer la liste des prix TCC. 

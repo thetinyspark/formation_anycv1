@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { firstValueFrom, Observable, of } from 'rxjs';
+import { firstValueFrom, Observable, of, ReplaySubject, Subject } from 'rxjs';
 
 type UserInfo1 = {name:string, age:number};
 type UserInfo2 = {name:string, sex:string};
@@ -41,47 +41,66 @@ export class DemoService {
     //   }
     // );
 
-    const obs = new Observable<number>(
-      (subscriber)=>{
-        let interval = setInterval(
-          ()=>{
-            console.log('Emitting new value');
-            subscriber.next(Math.floor(Math.random()*100));
-            // subscriber.next(30);
-            // subscriber.complete();
-          },
-          150
-        );
+    // const obs = new Observable<number>(
+    //   (subscriber)=>{
+    //     let interval = setInterval(
+    //       ()=>{
+    //         subscriber.next(Math.floor(Math.random()*100));
+    //         // subscriber.next(30);
+    //         // subscriber.complete();
+    //       },
+    //       100
+    //     );
 
-        // cette fonction est déclenchée lors de la désinscription à l'observable
-        // elle permet de faire du nettoyage
-        return ()=>{
-          clearInterval(interval);
-          console.log('Observable cleaned up');
-        };
+    //     // cette fonction est déclenchée lors de la désinscription à l'observable
+    //     // elle permet de faire du nettoyage
+    //     return ()=>{
+    //       clearInterval(interval);
+    //       console.log('Observable cleaned up');
+    //     };
 
-      }
-    );
+    //   }
+    // );
 
     // const p1 = firstValueFrom(obs);
     // const firstValue = await p1;
     // console.log(`First observable value: ${firstValue}`);
 
-    const sub = obs.subscribe(
-      {
-        next: (value)=>console.log(`Observable value: ${value}`),
-        error: (err)=>console.error('Observable error:', err),
-        complete: ()=>{ console.log('Observable completed');}
-      }
-    );
+    // const sub = obs.subscribe(
+    //   {
+    //     next: (value)=>console.log(`Observable value: ${value}`),
+    //     error: (err)=>console.error('Observable error:', err),
+    //     complete: ()=>{ console.log('Observable completed');}
+    //   }
+    // );
 
-    setTimeout(
+    // setTimeout(
+    //   ()=>{
+    //     sub.unsubscribe();
+    //     console.log('Unsubscribed from observable');
+    //   },
+    //   1000
+    // );
+
+    const subject = new ReplaySubject<number>();
+
+    subject.next(45);
+    subject.next(78);
+
+    subject.subscribe(  (value)=>console.log(`(sub 1): ${value}`) );
+
+    subject.next(66);
+    subject.next(67);
+
+    setTimeout( 
       ()=>{
-        sub.unsubscribe();
-        console.log('Unsubscribed from observable');
-      },
+        subject.subscribe(  (value)=>console.log(`(sub 2): ${value}`) );
+      }, 
       1000
     );
+
+    subject.complete();
+    subject.next(666666);
   }
 
   private async getUserInfo(): Promise<UserInfo3[]>{
