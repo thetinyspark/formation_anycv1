@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { firstValueFrom, Observable, of } from 'rxjs';
 
 type UserInfo1 = {name:string, age:number};
 type UserInfo2 = {name:string, sex:string};
@@ -29,10 +30,58 @@ export class DemoService {
     // permet de fusionner plusieurs promesses en une seule et d'attendre leur résolution
     const nums = await Promise.all([this.getRandomNumber(), Promise.resolve(666), this.getRandomNumber()]);
     console.log(nums);
-    */
-
+    
     const users = await this.getUserInfo();
     console.log(users);
+    */
+
+    // of(45).subscribe(
+    //   (value)=>{
+    //     console.log(`Observable value: ${value}`);
+    //   }
+    // );
+
+    const obs = new Observable<number>(
+      (subscriber)=>{
+        let interval = setInterval(
+          ()=>{
+            console.log('Emitting new value');
+            subscriber.next(Math.floor(Math.random()*100));
+            // subscriber.next(30);
+            // subscriber.complete();
+          },
+          150
+        );
+
+        // cette fonction est déclenchée lors de la désinscription à l'observable
+        // elle permet de faire du nettoyage
+        return ()=>{
+          clearInterval(interval);
+          console.log('Observable cleaned up');
+        };
+
+      }
+    );
+
+    // const p1 = firstValueFrom(obs);
+    // const firstValue = await p1;
+    // console.log(`First observable value: ${firstValue}`);
+
+    const sub = obs.subscribe(
+      {
+        next: (value)=>console.log(`Observable value: ${value}`),
+        error: (err)=>console.error('Observable error:', err),
+        complete: ()=>{ console.log('Observable completed');}
+      }
+    );
+
+    setTimeout(
+      ()=>{
+        sub.unsubscribe();
+        console.log('Unsubscribed from observable');
+      },
+      1000
+    );
   }
 
   private async getUserInfo(): Promise<UserInfo3[]>{
@@ -77,7 +126,6 @@ export class DemoService {
       {name: 'Charlie', sex: 'male'}  
     ]);
   }
-
 
   private getRandomNumber(): Promise<number> {
     const p1 = new Promise<number>(

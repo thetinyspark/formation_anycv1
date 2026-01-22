@@ -1,25 +1,11 @@
-# TP n°6
+# TP n°7
 
 
-Créez une promesse permettant de renvoyer un tableau d'objet contenant les propriétés suivantes: 
-{
-    name: "nom de l'utilisateur", 
-    age: "nom de l'utilisateur"
-}
+Créez un observable qui permet de diffuser des nombres compris entre 0-100. 
+On part du principe que ces nombres sont des prix. 
 
-Crérez une autre promesse permettant de renvoyer un tableau d'objet contenant les propriétés suivantes: 
-{
-    name: "nom de l'utilisateur", 
-    sex: "homme ou femme ou ce que vous voulez"
-}
+Affichez-les dans la console.
 
+BONUS: faire en sorte que ces nombres soient diffusés à intervalle régulier (100ms par ex);
 
-Le but étant de récupérer les données contenues dans les deux promesses et de les fusionner pour créer une 
-promesse supplémentaire permettant de retourner les objets contenant les propriétés suivantes: 
-
-{
-    name: "nom de l'utilisateur", 
-    age: "nom de l'utilisateur", 
-    sex: "homme ou femme ou ce que vous voulez"
-}
-
+ATTENTION, si on ne souscrit plus au flux de données, alors il faudra bien tout nettoyer (interval si vous en avez, et/ou compléter le flux si nécessaire);
