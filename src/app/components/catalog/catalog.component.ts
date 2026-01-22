@@ -67,4 +67,10 @@ export class CatalogComponent {
   public decTVA():void{
     this.myTVA.set(this.myTVA()-1)
   }
+  public incHT():void{
+    this.myPriceHT.set(this.myPriceHT()+10);
+  }
+  public decHT():void{
+    this.myPriceHT.set(this.myPriceHT()-10);
+  }
 }
