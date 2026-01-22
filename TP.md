@@ -1,12 +1,25 @@
-# TP n°5
+# TP n°6
 
 
-Faire en sorte  de créer une méthode getAllPlatforms sur ProductService (attention elle doit être décrite sur l'interface également). 
-Le but étant de renvoyer le tableau de toutes les plateformes ( sans aucun doublon bien sur ) et de sortir ce traitement 
-du catalog.component.ts. 
+Créez une promesse permettant de renvoyer un tableau d'objet contenant les propriétés suivantes: 
+{
+    name: "nom de l'utilisateur", 
+    age: "nom de l'utilisateur"
+}
 
-( regardez du côté des opérateurs pipe et map pour pouvoir exploiter le résultat de getProducts())
+Crérez une autre promesse permettant de renvoyer un tableau d'objet contenant les propriétés suivantes: 
+{
+    name: "nom de l'utilisateur", 
+    sex: "homme ou femme ou ce que vous voulez"
+}
 
 
-Bien sur vous devez construire le tableau de plateforme à partir des produits obtenus dans le catalog.json.
+Le but étant de récupérer les données contenues dans les deux promesses et de les fusionner pour créer une 
+promesse supplémentaire permettant de retourner les objets contenant les propriétés suivantes: 
+
+{
+    name: "nom de l'utilisateur", 
+    age: "nom de l'utilisateur", 
+    sex: "homme ou femme ou ce que vous voulez"
+}
 

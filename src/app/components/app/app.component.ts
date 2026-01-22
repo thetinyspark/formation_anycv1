@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet,  } from '@angular/router';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
+import { DemoService } from '../../services/demo.service';
 
 @Component({
   selector: 'app-root',
@@ -12,4 +13,9 @@ import { NavBarComponent } from '../nav-bar/nav-bar.component';
 })
 export class AppComponent {
   title = 'MyApp';
+  demo = inject(DemoService);
+
+  constructor(){
+    this.demo.launch();
+  }
 }
