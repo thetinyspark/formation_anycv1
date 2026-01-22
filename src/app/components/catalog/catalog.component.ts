@@ -31,6 +31,9 @@ export class CatalogComponent {
     )
   }
 
+  public addToCart( product:Product){
+    this._catalogService.addProductToCart(product);
+  }
 
   getCatalogFilters() {
     return {

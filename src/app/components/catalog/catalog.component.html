@@ -25,5 +25,6 @@
         <p>{{ currentProduct.description }}</p>
         <p>Price: {{ currentProduct.price }}€</p>
         <p>Platform: {{ currentProduct.platform }}</p>
+        <button (click)=addToCart(currentProduct)>BUY</button>
     </div>
 </div>

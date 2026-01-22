@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { HomeComponent } from './components/home/home.component';
 import { CartComponent } from './components/cart/cart.component';
+import { cartNotEmptyGuard } from './guards/cart-not-empty.guard';
 
 const routeConfig: Routes = [
   {
@@ -17,7 +18,8 @@ const routeConfig: Routes = [
   {
     path: 'cart',
     component: CartComponent,
-    title: 'Cart'
+    title: 'Cart', 
+    canActivate: [cartNotEmptyGuard]
   },
 ];
 

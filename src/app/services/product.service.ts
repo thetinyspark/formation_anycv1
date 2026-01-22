@@ -10,7 +10,9 @@ import { firstValueFrom, Observable } from 'rxjs';
 export class ProductService implements IProductService{
 
   private _products = signal<Product[]>([]);
+  private _cart = signal<Product[]>([]);
   public products = this._products.asReadonly();
+  public cart = this._cart.asReadonly();
 
   // les signaux déclenchent un update de la vue (HTML)
   // calcule un résultat et l'assigne à allPlatforms lorsque un signal est MAJ
@@ -25,12 +27,6 @@ export class ProductService implements IProductService{
   private _client:HttpClient = inject(HttpClient);
 
   constructor() {
-    effect( 
-      ()=>{
-        // éventuelles actions à lancer quand un signal est MAJ
-      }
-    )
-    
     this.refresh();
   }
 
@@ -45,5 +41,20 @@ export class ProductService implements IProductService{
 
   getProducts(): Observable<Product[]> {
     return this._client.get<Product[]>('assets/catalog.json?rand='+Math.round(Math.random()*1000));
+  }
+
+  public addProductToCart( product:Product){
+    const cart = this._cart();
+    cart.push(product);
+
+    console.log(cart);
+    this._cart.set(cart);
+  }
+
+  public removeProductFromCart( product:Product){
+    const cart = this._cart();
+    const pos = cart.indexOf(product);
+    cart.splice(pos, 1);
+    this._cart.set(cart);
   }
 }
