@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { firstValueFrom, Observable, of, ReplaySubject, Subject } from 'rxjs';
+import { combineLatest, firstValueFrom, forkJoin, map, Observable, of, ReplaySubject, Subject } from 'rxjs';
 
 type UserInfo1 = {name:string, age:number};
 type UserInfo2 = {name:string, sex:string};
@@ -82,33 +82,36 @@ export class DemoService {
     //   1000
     // );
 
-
-
-
-    const prices:number[] = [];
-    const tvas:number[] = [];
-
+    
 
     const pricesObs = new ReplaySubject<number>();
     const tvaObs = new ReplaySubject<number>();
 
-    function calcLastPrice(){
-      const price = prices[prices.length -1] || 0;
-      const tva = tvas[tvas.length -1] || 0;
-
-      console.log("Dernier prix TTC: ", price + (price * tva / 100) );
-    }
-
+    // forkJoin fonctionne avec des flux completés. Il attend que tous les flux soient complets
+    // combineLatest fonctionne avec des flux non completés. Il émet dès qu'un des flux émet une valeur nouvelle valeur
+    combineLatest({price: pricesObs, tva: tvaObs}).pipe(
+      map(
+        (obj) => { 
+          console.log("TVA: ", obj.tva, " Prix HT: ", obj.price);
+          return obj.price + (obj.price * obj.tva / 100); 
+        } 
+      )
+    ).subscribe(
+      (priceTTC) => console.log("Dernier prix TTC: ", priceTTC)
+    );
 
     setInterval(
       ()=>{
-        pricesObs.next( Math.round( Math.random()*100) );  
-        tvaObs.next( Math.round( Math.random()*20) );
-      }, 500
+
+        if( Math.random() > 0.5 ) {
+          pricesObs.next( Math.round( Math.random()*100) );  
+        }
+        else{
+          tvaObs.next( Math.round( Math.random()*20) );
+        }
+      }, 2000
     );
 
-    pricesObs.subscribe((price)=> { prices.push(price); calcLastPrice(); } );
-    tvaObs.subscribe((tva)=> { tvas.push(tva); calcLastPrice(); } );
   }
 
   private async getUserInfo(): Promise<UserInfo3[]>{
