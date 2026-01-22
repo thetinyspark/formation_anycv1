@@ -82,25 +82,33 @@ export class DemoService {
     //   1000
     // );
 
-    const subject = new ReplaySubject<number>();
 
-    subject.next(45);
-    subject.next(78);
 
-    subject.subscribe(  (value)=>console.log(`(sub 1): ${value}`) );
 
-    subject.next(66);
-    subject.next(67);
+    const prices:number[] = [];
+    const tvas:number[] = [];
 
-    setTimeout( 
+
+    const pricesObs = new ReplaySubject<number>();
+    const tvaObs = new ReplaySubject<number>();
+
+    function calcLastPrice(){
+      const price = prices[prices.length -1] || 0;
+      const tva = tvas[tvas.length -1] || 0;
+
+      console.log("Dernier prix TTC: ", price + (price * tva / 100) );
+    }
+
+
+    setInterval(
       ()=>{
-        subject.subscribe(  (value)=>console.log(`(sub 2): ${value}`) );
-      }, 
-      1000
+        pricesObs.next( Math.round( Math.random()*100) );  
+        tvaObs.next( Math.round( Math.random()*20) );
+      }, 500
     );
 
-    subject.complete();
-    subject.next(666666);
+    pricesObs.subscribe((price)=> { prices.push(price); calcLastPrice(); } );
+    tvaObs.subscribe((tva)=> { tvas.push(tva); calcLastPrice(); } );
   }
 
   private async getUserInfo(): Promise<UserInfo3[]>{
