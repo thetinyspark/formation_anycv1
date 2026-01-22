@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { Product } from '../../models/product';
 import { NgFor } from '@angular/common';
 import { PlatformPipe } from '../../pipes/platform.pipe';
@@ -14,43 +14,23 @@ import { ProductService } from '../../services/product.service';
   styleUrl: './catalog.component.css'
 })
 export class CatalogComponent {
-  public products:Product[] = [];
-  public allPlatforms:string[] = [];
+  private _catalogService: ProductService = inject(ProductService);
+  public products = this._catalogService.products;
+  public allPlatforms = this._catalogService.allPlatforms;
   public selectedPlatform:string = "All";
   public searchName:string = "";
   public minPrice:number = 0;
   public maxPrice:number = 1000;
-
-
-
-  public myPriceTTC = computed( 
-    ()=>{
-      return this.myPriceHT() + ( this.myPriceHT() * this.myTVA())/100
-    }
-  );
-  public myPriceHT = signal<number>(100);
-  public myTVA = signal<number>(0);
-  private _catalogService: ProductService = inject(ProductService);
+  public str:string = "";
 
   constructor(){
-    // effect(
-    //   ()=>{
-    //     const priceHT = this.myPriceHT();
-    //     const tva = this.myTVA();
-    //     // this.myPriceTTC = ( priceHT + (priceHT * tva)/100);
-    //   }
-    // )
+    effect(
+      ()=>{
+        this.str = "MAJ "+this.allPlatforms().length+" platforms at "+new Date().toLocaleTimeString();
+      }
+    )
   }
 
-  ngOnInit(): void {
-    this._catalogService.getProducts().subscribe(products => this.products = products);
-    this._catalogService.getAllPlatforms().subscribe(
-      (platforms) => {
-        this.allPlatforms = platforms
-        this.selectedPlatform = this.allPlatforms[0];
-      }
-    );
-  }
 
   getCatalogFilters() {
     return {
@@ -61,16 +41,4 @@ export class CatalogComponent {
     };
   }
 
-  public incTVA():void{
-    this.myTVA.set(this.myTVA()+1)
-  }
-  public decTVA():void{
-    this.myTVA.set(this.myTVA()-1)
-  }
-  public incHT():void{
-    this.myPriceHT.set(this.myPriceHT()+10);
-  }
-  public decHT():void{
-    this.myPriceHT.set(this.myPriceHT()-10);
-  }
 }

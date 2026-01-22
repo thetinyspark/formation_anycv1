@@ -1,7 +1,8 @@
 
 <div>
+    <p>{{str}}</p>
     <select name="" id="" [(ngModel)]="selectedPlatform">
-        <option *ngFor="let currentPlatform of allPlatforms" value={{currentPlatform}}>{{ currentPlatform }}</option>
+        <option *ngFor="let currentPlatform of allPlatforms()" value={{currentPlatform}}>{{ currentPlatform }}</option>
     </select>
     <br/>
 
@@ -18,7 +19,7 @@
     <br/>
 </div>
 <div class="products">
-    <div *ngFor="let currentProduct of products | catalogFilter:getCatalogFilters()" class="product">
+    <div *ngFor="let currentProduct of products() | catalogFilter:getCatalogFilters()" class="product">
         <h3>{{ currentProduct.name }}</h3>
         <img [src]="currentProduct.img" [alt]="currentProduct.name">
         <p>{{ currentProduct.description }}</p>
@@ -26,15 +27,3 @@
         <p>Platform: {{ currentProduct.platform }}</p>
     </div>
 </div>
-
-<div>
-    <p>{{myPriceHT()}}</p> <br/>
-    <p>{{myPriceTTC()}}</p> <br/>
-    <p>{{myTVA()}}</p> <br/>
-    <button (click)="incTVA()">TVA+</button>
-    <button (click)="decTVA()">TVA-</button>
-    <button (click)="incHT()">HT+10</button>
-    <button (click)="decHT()">HT-10</button>
-</div>
-
-<br/>
