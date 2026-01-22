@@ -23,12 +23,10 @@ export class CatalogComponent {
   private _catalogService: ProductService = inject(ProductService);
 
   ngOnInit(): void {
-    this._catalogService.getProducts().subscribe( 
-      
-      (products:Product[]) => {
-        this.products = products;
-        this.allPlatforms = Array.from( new Set(this.products.map(product => product.platform)) );
-        this.allPlatforms.unshift("All");
+    this._catalogService.getProducts().subscribe(products => this.products = products);
+    this._catalogService.getAllPlatforms().subscribe(
+      (platforms) => {
+        this.allPlatforms = platforms
         this.selectedPlatform = this.allPlatforms[0];
       }
     );

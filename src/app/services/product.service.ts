@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import IProductService from './IProductService';
-import { Product, PRODUCTS } from '../models/product';
+import { Product } from '../models/product';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root', 
@@ -14,5 +14,17 @@ export class ProductService implements IProductService{
 
   getProducts(): Observable<Product[]> {
     return this._client.get<Product[]>('assets/catalog.json');
+  }
+
+  getAllPlatforms(): Observable<string[]> {
+    return this.getProducts().pipe(
+      map(
+        (products:Product[]) => {
+          const allPlatforms:string[] = Array.from( new Set(products.map(product => product.platform)) );
+          allPlatforms.unshift("All");
+          return allPlatforms;
+        }
+      )
+    );
   }
 }
