@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { LoginServiceService } from '../../services/login-service.service';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validator
 })
 export class LoginComponent {
   private _builder:FormBuilder = inject(FormBuilder);
+  private _loginService = inject(LoginServiceService);
 
   public form: FormGroup = this._builder.group(
     {
@@ -32,10 +34,17 @@ export class LoginComponent {
 
   public onSubmit(){
     if( this.form.valid ){
-      alert("it is ok");
+      this._loginService.login( 
+        this.form.get('email')?.value,
+        this.form.get('password')?.value
+      ); 
+    }
+
+    if( this._loginService.isConnected()){
+      alert("User connected");
     }
     else{
-      alert("not ok");
+      alert("User disconnected");
     }
   }
 }
