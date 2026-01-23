@@ -4,10 +4,13 @@ import { Product } from '../models/product';
 import { HttpClient } from '@angular/common/http';
 import { delay, firstValueFrom, Observable } from 'rxjs';
 import { LoadingService } from './loading.service';
+import { RegisterClass } from '../decorators/RegisterClass';
+import { LogMethodCall } from '../decorators/LogMethodCall';
 
 @Injectable({
   providedIn: 'root', 
 })
+@RegisterClass({name:"productservice"})
 export class ProductService implements IProductService{
 
   private _products = signal<Product[]>([]);
@@ -55,6 +58,7 @@ export class ProductService implements IProductService{
     return this._client.get<Product[]>('assets/catalog.json?rand='+Math.round(Math.random()*1000));
   }
 
+  @LogMethodCall
   public addProductToCart( product:Product){
     const cart = this._cart();
     cart.push(product);
