@@ -32,6 +32,11 @@ export class ProductService implements IProductService{
     // this.autoRefresh();
   }
 
+  public reset(){
+    this._products.set([]);
+    this._cart.set([]);
+  }
+  
   public async refresh(){
     this._loading.loadDuring(1000);
     const products = await firstValueFrom( this.getProducts().pipe( delay(1000)) );
