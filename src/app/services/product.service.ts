@@ -3,6 +3,7 @@ import IProductService from './IProductService';
 import { Product } from '../models/product';
 import { HttpClient } from '@angular/common/http';
 import { delay, firstValueFrom, Observable } from 'rxjs';
+import { LoadingService } from './loading.service';
 
 @Injectable({
   providedIn: 'root', 
@@ -25,12 +26,14 @@ export class ProductService implements IProductService{
   ); 
 
   private _client:HttpClient = inject(HttpClient);
+  private _loading:LoadingService = inject(LoadingService);
 
   constructor() {
     // this.autoRefresh();
   }
 
   public async refresh(){
+    this._loading.loadDuring(5000);
     const products = await firstValueFrom( this.getProducts().pipe( delay(5000)) );
     this._products.set(products);
   }

@@ -1,5 +1,6 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-loading',
@@ -9,5 +10,6 @@ import { Component } from '@angular/core';
   styleUrl: './loading.component.css'
 })
 export class LoadingComponent {
-  public percentage:number = 50;
+  private _loadingService = inject(LoadingService);
+  public percentage = this._loadingService.loadingPercentage;
 }
