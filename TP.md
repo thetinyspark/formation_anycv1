@@ -1,13 +1,14 @@
-# TP n°12
+# TP n°13
 
-Créez un resolver permettant de "résoudre" / charger l'ensemble des plateformes. 
-L'associer à la route catalog. 
-Récupérer les plateformes via la route et non plus via _catalogService. 
+- Créez un service nommé LoadingService qui expose 
+un signal nommé "loadingPercentage" qui est donc un signal de number. 
+
+- Dans LoadingComponent, changez le type de la propriété publique 
+percentage et liez là à ce signal "loadingPercentage"
 
 
-BONUS 
-
-Faire la même chose mais avec les produits contenus dans le panier
-pour la route "cart"
+- Puis dans le ProductService, faites-vous injecter le LoadingService et manipulez la valeur de "loadingPercentage". 
+De sorte à ce qu'elle soit au dessus de 0 le temps du chargement 
+et à 100 lorsque le chargement est terminé.
 
 
