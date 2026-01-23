@@ -17,7 +17,11 @@ const routeConfig: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent,
+    // component: LoginComponent,
+    loadComponent: async ():Promise<any> =>{
+      const module = await import('./components/login/login.component');
+      return module.LoginComponent;
+    },
     title: 'Login'
   },
   {
