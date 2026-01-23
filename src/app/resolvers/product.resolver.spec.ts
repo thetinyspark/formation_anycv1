@@ -3,8 +3,11 @@ import { ResolveFn } from '@angular/router';
 
 import { productResolver } from './product.resolver';
 
+import { Signal } from '@angular/core';
+import { Product } from '../models/product';
+
 describe('productResolver', () => {
-  const executeResolver: ResolveFn<boolean> = (...resolverParameters) => 
+  const executeResolver: ResolveFn<Promise<Signal<Product[]>>> = (...resolverParameters) => 
       TestBed.runInInjectionContext(() => productResolver(...resolverParameters));
 
   beforeEach(() => {
