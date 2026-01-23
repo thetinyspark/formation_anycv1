@@ -1,0 +1,7 @@
+{
+  "locale": "en",
+  "translations": {
+    "3297476686133813275": " Bonjour {$ICU}\n",
+    "6172486519084142934": "{VAR_PLURAL, plural, =0 {Le magasin est vide} =1 {Il y a un produit} other {Il y a {INTERPOLATION} produits}}"
+  }
+}
