@@ -1,5 +1,4 @@
-# TP n°16
+# TP n°17
 
-- Tester le NamePipe
-- Tester le PlatformPipe
+- Tester l'ajout et le retrait d'un produit du cart signal dans ProductService
 
