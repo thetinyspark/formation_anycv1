@@ -14,7 +14,7 @@ export class LoginComponent {
 
   public form: FormGroup = this._builder.group(
     {
-      email: ['', [Validators.required]], 
+      email: ['', [Validators.required, this.validateEmail]], 
       password: ['', [Validators.required, this.validatePassword]]
     }
   ); 
@@ -23,6 +23,11 @@ export class LoginComponent {
     const value:string = control.value;
     const isValid = value.length >= 8;
     return isValid ? null : { tooShortPassword: true};
+  }
+
+  public validateEmail(control:AbstractControl){
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(control.value);
+    return isValid ? null : { invalidEmail: true};
   }
 
   public onSubmit(){
