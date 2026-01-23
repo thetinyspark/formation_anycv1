@@ -1,9 +1,9 @@
 import { PRODUCTS } from '../models/product';
 import { PricePipe } from './price.pipe';
 
-describe('PricePipe Test Suite', () => {
+fdescribe('PricePipe Test Suite', () => {
 
-  fit(
+  it(
     'create an instance', 
     () => {
       const pipe = new PricePipe();
@@ -11,7 +11,7 @@ describe('PricePipe Test Suite', () => {
     }
   );
 
-  fit(
+  it(
     'price should be between a minimum and a maximum', 
     () => {
       // given
