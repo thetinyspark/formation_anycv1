@@ -4,6 +4,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CartComponent } from './components/cart/cart.component';
 import { cartNotEmptyGuard } from './guards/cart-not-empty.guard';
 import { isConnectedGuardGuard } from './guards/is-connected-guard.guard';
+import { productResolver } from './resolvers/product.resolver';
 
 const routeConfig: Routes = [
   {
@@ -14,7 +15,10 @@ const routeConfig: Routes = [
   {
     path: 'catalog',
     component: CatalogComponent,
-    title: 'Catalog'
+    title: 'Catalog', 
+    resolve: {
+      products: productResolver
+    }
   },
   {
     path: 'cart',

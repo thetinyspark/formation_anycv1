@@ -1,10 +1,11 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, inject, Signal } from '@angular/core';
 import { Product } from '../../models/product';
 import { NgFor } from '@angular/common';
 import { PlatformPipe } from '../../pipes/platform.pipe';
 import { FormsModule } from '@angular/forms';
 import { CatalogPipe } from '../../pipes/catalog.pipe';
 import { ProductService } from '../../services/product.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-catalog',
@@ -15,24 +16,17 @@ import { ProductService } from '../../services/product.service';
 })
 export class CatalogComponent {
   private _catalogService: ProductService = inject(ProductService);
-  public products = this._catalogService.products;
+  private _route:ActivatedRoute = inject(ActivatedRoute);
+  public products:Signal<Product[]> = this._route.snapshot.data['products'];
   public allPlatforms = this._catalogService.allPlatforms;
   public selectedPlatform:string = "All";
   public searchName:string = "";
   public minPrice:number = 0;
   public maxPrice:number = 1000;
-  public str:string = "";
-
-  constructor(){
-    effect(
-      ()=>{
-        this.str = "MAJ "+this.allPlatforms().length+" platforms at "+new Date().toLocaleTimeString();
-      }
-    )
-  }
 
   public addToCart( product:Product){
-    this._catalogService.addProductToCart(product);
+    console.log(product);
+    // this._catalogService.addProductToCart(product);
   }
 
   getCatalogFilters() {

@@ -1,19 +1,13 @@
-# TP n°11
+# TP n°12
 
-- Afficher les produits contenus dans le cart au sein du cartComponent
-- Branchez-vous sur le signal nommé "cart" (ProductService)
-
-BONUS I
-
-- Ajouter un bouton pour enlever un produit du panier (il y a déjà une fonction removeFromCart sur ProductService)
-
-BONUS II: 
-
-- Créez une guard nommée "IsConnectedGuard". 
-Le principe est simple si cette guard retourne true, alors on 
-peut aller sur l'URL "cart"
-
-- si elle retourne alors on ne peut pas y aller même si le panier n'est pas vide. 
+Créez un resolver permettant de "résoudre" / charger l'ensemble des plateformes. 
+L'associer à la route catalog. 
+Récupérer les plateformes via la route et non plus via _catalogService. 
 
 
-Faites en sorte de retourner true ou false une fois sur deux.
+BONUS 
+
+Faire la même chose mais avec les produits contenus dans le panier
+pour la route "cart"
+
+
