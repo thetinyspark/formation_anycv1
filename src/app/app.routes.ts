@@ -5,6 +5,8 @@ import { CartComponent } from './components/cart/cart.component';
 import { cartNotEmptyGuard } from './guards/cart-not-empty.guard';
 import { isConnectedGuardGuard } from './guards/is-connected-guard.guard';
 import { productResolver } from './resolvers/product.resolver';
+import { cartResolver } from './resolvers/cart.resolver';
+import { platformResolver } from './resolvers/platform.resolver';
 
 const routeConfig: Routes = [
   {
@@ -17,14 +19,18 @@ const routeConfig: Routes = [
     component: CatalogComponent,
     title: 'Catalog', 
     resolve: {
-      products: productResolver
+      products: productResolver, 
+      platforms: platformResolver
     }
   },
   {
     path: 'cart',
     component: CartComponent,
     title: 'Cart', 
-    canActivate: [cartNotEmptyGuard, isConnectedGuardGuard]
+    canActivate: [cartNotEmptyGuard, isConnectedGuardGuard], 
+    resolve: {
+      cart: cartResolver
+    }
   },
 ];
 

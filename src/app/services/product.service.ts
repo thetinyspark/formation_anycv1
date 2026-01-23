@@ -2,7 +2,7 @@ import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import IProductService from './IProductService';
 import { Product } from '../models/product';
 import { HttpClient } from '@angular/common/http';
-import { firstValueFrom, Observable } from 'rxjs';
+import { delay, firstValueFrom, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root', 
@@ -27,14 +27,18 @@ export class ProductService implements IProductService{
   private _client:HttpClient = inject(HttpClient);
 
   constructor() {
-    this.refresh();
+    // this.autoRefresh();
   }
 
-  async refresh(){
-    const products = await firstValueFrom( this.getProducts() );
+  public async refresh(){
+    const products = await firstValueFrom( this.getProducts().pipe( delay(5000)) );
     this._products.set(products);
+  }
+
+  private async autoRefresh(){
+    await this.refresh();
     setTimeout( 
-      ()=>this.refresh(), 
+      ()=>this.autoRefresh(), 
       5000
     );
   }
@@ -46,8 +50,6 @@ export class ProductService implements IProductService{
   public addProductToCart( product:Product){
     const cart = this._cart();
     cart.push(product);
-
-    console.log(cart);
     this._cart.set(cart);
   }
 

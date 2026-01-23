@@ -18,15 +18,14 @@ export class CatalogComponent {
   private _catalogService: ProductService = inject(ProductService);
   private _route:ActivatedRoute = inject(ActivatedRoute);
   public products:Signal<Product[]> = this._route.snapshot.data['products'];
-  public allPlatforms = this._catalogService.allPlatforms;
+  public allPlatforms = this._route.snapshot.data['platforms'];
   public selectedPlatform:string = "All";
   public searchName:string = "";
   public minPrice:number = 0;
   public maxPrice:number = 1000;
 
   public addToCart( product:Product){
-    console.log(product);
-    // this._catalogService.addProductToCart(product);
+    this._catalogService.addProductToCart(product);
   }
 
   getCatalogFilters() {
