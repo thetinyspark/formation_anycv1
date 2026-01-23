@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class LoginServiceService {
 
-  private _isConnected:boolean = false;
+  private _isConnected:boolean = true;
 
   constructor() { }
 

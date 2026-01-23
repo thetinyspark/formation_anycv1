@@ -33,8 +33,8 @@ export class ProductService implements IProductService{
   }
 
   public async refresh(){
-    this._loading.loadDuring(5000);
-    const products = await firstValueFrom( this.getProducts().pipe( delay(5000)) );
+    this._loading.loadDuring(1000);
+    const products = await firstValueFrom( this.getProducts().pipe( delay(1000)) );
     this._products.set(products);
   }
 
